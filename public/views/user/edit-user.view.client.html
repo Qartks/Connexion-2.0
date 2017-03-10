@@ -1,0 +1,185 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-4dp fixed-position" layout="column" md-component-id="left" flex>
+    <div class="sidenav-toolbar">
+        <div ng-if="model.user">
+            <img ng-src="{{model.user.profilePicture}}" class="user-avatar">
+            <h3>Username : {{model.user.username}}</h3>
+            <h3>Name : {{model.user.firstName}}</h3>
+        </div>
+        <div ng-if="!model.user">
+            <span><br><br></span>
+        </div>
+    </div>
+    <md-list>
+        <md-item>
+            <md-button class="side-nav-button" ng-click="model.goToProfile()">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <i class="material-icons center-vertical-align">account_circle</i>
+                    </div>
+                    <div class="inset center-vertical-align">
+                        Profile
+                    </div>
+                </md-item-content>
+            </md-button>
+        </md-item>
+        <md-item>
+            <md-button class="side-nav-button" ng-click="model.goToCreatePost()">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <i class="material-icons center-vertical-align">create</i>
+                    </div>
+                    <div class="inset center-vertical-align">
+                        Create Post
+                    </div>
+                </md-item-content>
+            </md-button>
+        </md-item>
+        <md-item>
+            <md-button class="side-nav-button" ng-click="model.logout()">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <i class="material-icons center-vertical-align">power_settings_new</i>
+                    </div>
+                    <div class="inset center-vertical-align">
+                        Login/Logout
+                    </div>
+                </md-item-content>
+            </md-button>
+        </md-item>
+        <div class="bottom-bar">
+            <md-button class="md-fab md-primary md-whiteframe-4dp" ng-click="model.toggleLeft()">
+                <i class="material-icons center-vertical-align">cancel</i>
+            </md-button>
+        </div>
+    </md-list>
+</md-sidenav>
+
+<md-toolbar class="tool-bar-color">
+    <div class="md-toolbar-tools">
+        <a class="menu-icons" ng-click="model.goBack()">
+            <i class="material-icons">arrow_back</i>
+        </a>
+        <span>
+            <a href="#/user">
+                <h1 class="main-header">Connexion</h1>
+            </a>
+        </span>
+        <span flex=""></span>
+        <a class="menu-icons" href="" ng-click="model.goToSearch()" ><i class="tool-bar-icons material-icons">search</i></a>
+        <a class="menu-icons" href="" ng-click="model.goToProfile()" hide-sm hide-xs><i class="tool-bar-icons material-icons">account_circle</i></a>
+        <a class="menu-icons" href="" ng-click="model.goToCreatePost()" hide-sm hide-xs><i class="tool-bar-icons  material-icons">create</i></a>
+        <a class="menu-icons" href="" ng-click="model.logout()" hide-sm hide-xs><i class="tool-bar-icons material-icons">power_settings_new</i></a>
+        <a ng-click="model.toggleLeft('')" class="menu-icons" hide-gt-sm>
+            <i class="tool-bar-icons material-icons">more_vert</i>
+        </a>
+    </div>
+</md-toolbar>
+
+<div class="container">
+    <div class="content-wrapper">
+        <div class="left-column">
+            <div class="col-sm-12 col-md-4">
+                <div> <h2 class="margin-0"><small>Preview</small></h2> </div>
+                <div class="panel">
+                    <div class="text-center profile-panel">
+                        <img class=" img-circle padding-15" ng-if="model.user.profilePicture" ng-src="{{model.user.profilePicture}}" alt="..." width="100"/>
+                        <img class=" img-circle padding-15" ng-if="!model.user.profilePicture" ng-src="../../img/person.png" alt="..." width="100"/>
+                        <div>
+                            <h3 class="margin-0" style="padding-top: 15px"> {{model.user.firstName + " " +model.user.lastName}}</h3>
+                            <small> {{model.user.username}}</small>
+                            <p class="padding-15"> {{ model.user.headline }}</p>
+                        </div>
+                    </div>
+                    <hr class="margin-0">
+                    <div class="padding-15">
+                        <div>
+                            <p pre-whitespace> {{model.user.tagline}}</p>
+                        </div>
+                        <hr class="margin-0">
+                        <div style="margin-top: 5px">
+                            <p><strong>About</strong></p>
+                            <p class="pre-whitespace"> {{model.user.bio}} </p>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="/api/upload" method="post" enctype="multipart/form-data">
+                    <input  name="myFile"    type="file" class="form-control"/>
+                    <input  name="user"     value="{{model.user}}" style="display: none"/>
+                    <input  name="userId"     value="{{model.userId}}" style="display: none"/>
+                    <button type="submit"    class="btn btn-block btn-primary">Upload Profile Image</button>
+                </form>
+
+            </div>
+
+            <div class="col-sm-12 col-md-8">
+                <form name="editUserForm">
+
+                    <div ng-show="model.error"
+                         class="alert alert-danger alert-dismissable ">
+                        {{model.error}}
+                    </div>
+
+                    <md-card>
+                        <md-card-title>
+
+                            <md-card-title-text>
+                                <span class="md-headline">Edit profile</span>
+                            </md-card-title-text>
+
+                        </md-card-title>
+                        <md-card-content layout="column" class="new-post-card">
+
+                            <md-input-container>
+                                <label>First Name</label>
+                                <input ng-model="model.user.firstName" required>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Last Name</label>
+                                <input ng-model="model.user.lastName" required>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Username</label>
+                                <input ng-model="model.user.username" disabled>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Email</label>
+                                <input ng-model="model.user.email" required>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Phone</label>
+                                <input ng-model="model.user.phone">
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Headline</label>
+                                <input ng-model="model.user.headline" required>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Tag line</label>
+                                <input ng-model="model.user.tagline" required>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Description</label>
+                                <textarea ng-model="model.user.bio" md-maxlength="200" rows="5" md-select-on-focus="" required></textarea>
+                            </md-input-container>
+
+                        </md-card-content>
+                        <md-card-actions layout="column" layout-align="start">
+                            <md-button class="md-accent md-raised" ng-click="model.updateThisProfile(model.user)">Update</md-button>
+                            <md-button class="md-warn md-raised" ng-click="model.goBackToProfile()">Cancel</md-button>
+                        </md-card-actions>
+                    </md-card>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

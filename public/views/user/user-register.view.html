@@ -1,0 +1,32 @@
+<md-card flex-gt-md="25" flex-gt-xs="45" flex-xs="90" class="center-box">
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Register</span>
+        </md-card-title-text>
+    </md-card-title>
+    <div ng-show="model.error"
+         class="alert alert-info alert-dismissable">
+        {{model.error}}
+    </div>
+    <!--<md-divider></md-divider>-->
+    <md-card-content>
+        <form name="registerForm" layout-gt-xs="column" layout-xs="column">
+            <md-input-container>
+                <label class="small-label">Username</label>
+                <input type="text" ng-model="model.user.username" required>
+            </md-input-container>
+            <md-input-container>
+                <label class="small-label">Password</label>
+                <input ng-model="model.user.password" type="password" required>
+            </md-input-container>
+            <md-input-container>
+                <label class="small-label">Re enter Password</label>
+                <input ng-model="model.user.passwordVerify" type="password" required>
+            </md-input-container>
+            <md-card-actions layout="column" layout-align="start">
+                <md-button class="md-raised button-text white-color login-button" ng-click="model.registerUser(model.user)">Register</md-button>
+                <md-button class="md-primary md-hue-1 md-raised button-text white-color" style="background-color: #f1c40f" ng-click="model.goBack()">Cancel</md-button>
+            </md-card-actions>
+        </form>
+    </md-card-content>
+</md-card>

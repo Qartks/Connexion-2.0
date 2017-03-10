@@ -1,0 +1,11 @@
+<md-bottom-sheet class="md-list bottom-sheet-fix-below">
+    <md-list>
+        <md-item ng-repeat="item in model.items" flex layout="column">
+            <md-button class="bottom-sheet-button" aria-label="{{item.name}}" ng-click="model.listItemClick(item.name)" flex>
+                <h3 class="bottom-sheet-h3">
+                    {{item.name}}
+                </h3>
+            </md-button>
+        </md-item>
+    </md-list>
+</md-bottom-sheet>

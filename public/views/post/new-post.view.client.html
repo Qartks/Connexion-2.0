@@ -1,0 +1,175 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-4dp fixed-position" layout="column" md-component-id="left" flex>
+    <div class="sidenav-toolbar">
+        <div ng-if="model.user">
+            <img ng-src="{{model.user.profilePicture}}" class="user-avatar">
+            <h3>Username : {{model.user.username}}</h3>
+            <h3>Name : {{model.user.firstName}}</h3>
+        </div>
+        <div ng-if="!model.user">
+            <span><br><br></span>
+        </div>
+    </div>
+    <md-list>
+        <md-item>
+            <md-button class="side-nav-button" ng-click="model.goToProfile()">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <i class="material-icons center-vertical-align">account_circle</i>
+                    </div>
+                    <div class="inset center-vertical-align">
+                        Profile
+                    </div>
+                </md-item-content>
+            </md-button>
+        </md-item>
+        <md-item>
+            <md-button class="side-nav-button" ng-click="model.logout()">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <i class="material-icons center-vertical-align">power_settings_new</i>
+                    </div>
+                    <div class="inset center-vertical-align">
+                        Login/Logout
+                    </div>
+                </md-item-content>
+            </md-button>
+        </md-item>
+        <div class="bottom-bar">
+            <md-button class="md-fab md-primary md-whiteframe-4dp" ng-click="model.toggleLeft()">
+                <i class="material-icons center-vertical-align">cancel</i>
+            </md-button>
+        </div>
+    </md-list>
+</md-sidenav>
+
+<md-toolbar class="tool-bar-color">
+    <div class="md-toolbar-tools">
+        <a class="menu-icons" ng-click="model.goBack()">
+            <i class="material-icons">arrow_back</i>
+        </a>
+        <span>
+            <a href="#/user">
+                <h1 class="main-header">Connexion</h1>
+            </a>
+        </span>
+        <span flex=""></span>
+        <a class="menu-icons" href="" ng-click="model.goToSearch()" ><i class="tool-bar-icons material-icons">search</i></a>
+        <a class="menu-icons" href="" ng-click="model.goToProfile()" hide-sm hide-xs><i class="tool-bar-icons material-icons">account_circle</i></a>
+        <a class="menu-icons" href="" ng-click="model.logout()" hide-sm hide-xs><i class="tool-bar-icons material-icons">power_settings_new</i></a>
+        <a ng-click="model.toggleLeft('')" class="menu-icons" hide-gt-sm>
+            <i class="tool-bar-icons material-icons">more_vert</i>
+        </a>
+    </div>
+</md-toolbar>
+
+<div class="container">
+    <div class="content-wrapper">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 right-column ">
+            <form name="newPostForm">
+
+
+                <div ng-show="model.error"
+                     class="alert alert-danger alert-dismissable">
+                    {{model.error}}
+                </div>
+
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">New Post</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content layout="column" class="new-post-card">
+                        <md-input-container>
+                            <label>Title</label>
+                            <input ng-model="model.post.postName" required>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Contact Person</label>
+                            <input ng-model="model.user.username" disabled>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Email</label>
+                            <input ng-model="model.user.email" required>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Phone</label>
+                            <input ng-model="model.user.phone">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Location</label>
+                            <input ng-model="model.address" g-places-autocomplete required>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <label>Description</label>
+                            <textarea ng-model="model.post.description" md-maxlength="140" rows="5" md-select-on-focus="" required>
+                            </textarea>
+                        </md-input-container>
+                        <div layout-gt-xs="row">
+                            <md-input-container>
+                                <label>Event date</label>
+                                <md-datepicker ng-model="model.post.dateOfEvent"></md-datepicker>
+                            </md-input-container>
+                        </div>
+                        <md-checkbox id="isOpen" ng-model="model.post.isOpen" required> Open to all?</md-checkbox>
+                        <md-checkbox ng-show="model.user.twitter.id" id="tweet" ng-model="model.sendTweet"> Send a Tweet out?</md-checkbox>
+
+                    </md-card-content>
+                    <md-card-actions layout="column" layout-align="start">
+                        <md-button class="md-accent md-raised" ng-click="model.createPost(model.post)">Post</md-button>
+                        <md-button class="md-warn md-raised" href="#/user">Cancel</md-button>
+                    </md-card-actions>
+                </md-card>
+            </form>
+        </div>
+        <div class="hidden-xs hidden-sm col-md-4 col-lg-4 left-column">
+            <div class="stick">
+                <div class="col-xs-12">
+                    <div class="md-whiteframe-5dp green">
+
+                        <div class="card-header">
+                            <h2 class="purple">Search Image</h2>
+                        </div>
+                        <div class="list-group no-bg">
+                            <div layout="row">
+                                <input ng-model="searchText" class="searchBox" placeholder="Search flicker" aria-label="Search">
+                                <md-button aria-label="send" ng-click="model.searchPhotos(searchText)">
+                                    <i class="material-icons">search</i>
+                                </md-button>
+                            </div>
+                            <div ng-if="model.photos.photo">
+                                <div id="carousel" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item" ng-class='{active:$first}' ng-repeat="photo in model.photos.photo">
+                                            <img class="custom-image" ng-click="model.selectPhoto(photo)"
+                                                 ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
+                                        </div>
+                                    </div>
+                                    <a class="left carousel-control" data-target="#carousel" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" data-target="#carousel" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md-whiteframe-5dp">
+                        <div ng-repeat="pic in model.pictures track by $index">
+                            <div class="col-sm-6">
+                                <div>
+                                    <img class="" ng-dblclick="model.deleteThisPic($index)"ng-src="{{pic}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

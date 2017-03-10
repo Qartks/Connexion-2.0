@@ -1,0 +1,173 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-4dp fixed-position" layout="column" md-component-id="left" flex>
+    <div class="sidenav-toolbar">
+        <div ng-if="model.loggedInUser!=='0'">
+            <img ng-src="{{model.loggedInUser.profilePicture}}" class="user-avatar">
+            <h3>Username : {{model.loggedInUser.username}}</h3>
+            <h3>Name : {{model.loggedInUser.firstName}}</h3>
+        </div>
+        <div ng-if="model.loggedInUser==='0'">
+            <span><br><br></span>
+        </div>
+    </div>
+    <md-list>
+        <md-item>
+            <md-button class="side-nav-button" ng-click="model.goToCreatePost()">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <i class="material-icons center-vertical-align">create</i>
+                    </div>
+                    <div class="inset center-vertical-align">
+                        Create Post
+                    </div>
+                </md-item-content>
+            </md-button>
+        </md-item>
+        <md-item>
+            <md-button class="side-nav-button" ng-click="model.logout()">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <i class="material-icons center-vertical-align">power_settings_new</i>
+                    </div>
+                    <div class="inset center-vertical-align">
+                        Login/Logout
+                    </div>
+                </md-item-content>
+            </md-button>
+        </md-item>
+        <div class="bottom-bar">
+            <md-button class="md-fab md-primary md-whiteframe-4dp" ng-click="model.toggleLeft()">
+                <i class="material-icons center-vertical-align">cancel</i>
+            </md-button>
+        </div>
+    </md-list>
+</md-sidenav>
+
+<md-toolbar class="tool-bar-color">
+    <div class="md-toolbar-tools">
+        <a class="menu-icons" ng-click="model.goBack()">
+            <i class="material-icons">arrow_back</i>
+        </a>
+        <span>
+            <a href="#/user">
+                <h1 class="main-header">Connexion</h1>
+            </a>
+        </span>
+        <span flex=""></span>
+        <a class="menu-icons" href="" ng-click="model.goToSearch()" ><i class="tool-bar-icons material-icons">search</i></a>
+        <a class="menu-icons" href="" ng-click="model.goToCreatePost()" hide-sm hide-xs><i class="tool-bar-icons  material-icons">create</i></a>
+        <a class="menu-icons" href="" ng-click="model.logout()" hide-sm hide-xs><i class="tool-bar-icons material-icons">power_settings_new</i></a>
+        <a ng-click="model.toggleLeft('')" class="menu-icons" hide-gt-sm>
+            <i class="tool-bar-icons material-icons">more_vert</i>
+        </a>
+    </div>
+</md-toolbar>
+
+
+<div class="container">
+    <div class="content-wrapper">
+        <div class="left-column">
+            <div class="col-sm-12 col-md-4">
+                <div> <h2 class="margin-0">Profile</h2> </div>
+                <div class="panel">
+                    <div class="text-center profile-panel">
+                        <img class=" img-circle padding-15" ng-if="model.user.profilePicture" ng-src="{{model.user.profilePicture}}" alt="..." width="100"/>
+                        <img class=" img-circle padding-15" ng-if="!model.user.profilePicture" ng-src="../../img/person.png" alt="..." width="100"/>
+                        <div>
+                            <h3 class="margin-0" style="padding-top: 15px"> {{model.user.firstName + " " +model.user.lastName}}</h3>
+                            <small> {{model.user.username}}</small>
+                            <p class="padding-15"> {{ model.user.headline }}</p>
+                        </div>
+                    </div>
+                    <hr class="margin-0">
+                    <div class="padding-15">
+                        <div>
+                            <p> {{model.user.tagline}}</p>
+                        </div>
+                        <hr class="margin-0">
+                        <div style="margin-top: 5px">
+                            <p><strong>About</strong></p>
+                            <p class="pre-whitespace"> {{model.user.bio}} </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-show="model.isLoggedIn()">
+                    <section layout="row" layout-sm="row" layout-align="center" ng-show="model.isThisMine()">
+                        <md-button class="md-raised md-primary" ng-click="model.editThisProfile()"> Edit </md-button>
+                        <md-button class="md-raised md-warn" ng-click="model.deleteThisProfile()"> UnRegister </md-button>
+                    </section>
+                </div>
+                <div class="panel stats-panel">
+                    <table class="table table-striped m-b-none">
+                        <thead>
+                        <tr>
+                            <th>Stats</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Events Involved</td>
+                            <td class="text-success">
+                                {{model.data.length}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Events hosted</td>
+                            <td class="text-success">
+                                {{model.posts.length}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Popularity</td>
+
+                            <td layout="row">
+                                <span ng-repeat="i in model.rating track by $index">
+                                    <i class="material-icons stars">star_rate</i>
+                                </span>
+                            </td>
+                        </tr>
+                        </td>
+                        </tbody>
+                    </table>
+                    <div ng-show="model.isLoggedIn()">
+                        <div class="slider-div" ng-show="!model.isThisMine()">
+                            <p>Rate User</p>
+                            <rzslider rz-slider-model="model.slider.value" rz-slider-options="model.slider.options"></rzslider>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8">
+                <div> <h2 class="margin-0">User events</h2> </div>
+
+
+
+                <div class="event-list">
+                    <div class="event" ng-if="model.data[0]" ng-repeat="d in model.data | filter:{postName:searchText} | orderBy: '-dateCreated' " ng-class="model.openPost(d)">
+                        <div class="container-fluid">
+                            <div class="container-fluid details-card">
+                                <div layout="row">
+                                    <h2 href="" ng-click="model.goToPostDetails(d)">
+                                        {{d.postName}}
+                                        <small>
+                                            <span class="badge red-color" ng-show="model.typeOfPost(d, 1)">G</span>
+                                            <span class="badge other-color" ng-show="model.typeOfPost(d, 2)">I</span>
+                                            <span class="badge bluish-color" ng-show="model.typeOfPost(d, 3)">C</span>
+                                        </small>
+                                    </h2>
+                                </div>
+                                <span class="md-subhead yellow-color" ng-click="model.goToUserProfilePage(d)">{{d.organizer}}</span>
+                                <span class="md-subhead">{{d.address}}</span>
+                                <md-divider></md-divider>
+                                <p class="pre-whitespace">{{d.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event md-whiteframe-1dp no-posts"  ng-if="!model.data[0]" layout-padding>
+                        No Posts to show right now.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

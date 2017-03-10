@@ -1,0 +1,108 @@
+<md-toolbar class="tool-bar-color">
+    <div class="md-toolbar-tools">
+        <span>
+            <a href="#/user">
+                <h1 class="main-header">Connexion</h1>
+            </a>
+        </span>
+        <span flex=""></span>
+        <md-button aria-label="Open Settings" ng-click="model.showListBottomSheet($event)">
+            <i class="tool-bar-icons material-icons menu-icons">more_vert</i>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<div class="content-wrapper" layout="column">
+    <div style="padding-top: 5%">
+        <div flex layout-padding class="black text-center">
+            <div class="inner-div">
+                Never feel bored again.<br>
+                Say Hello to
+                <span class="span-logo">Connexion!</span>
+                <br>
+                A place to meet people and collaborate
+            </div>
+        </div>
+        <div class="embed-responsive embed-responsive-16by9" style="border-color: #1b9c80">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/XSy65qzLdq4" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <hr style="border: dashed">
+    </div>
+    <section id="demo-section" class="section-info">
+        <h1>
+            Discover ways to collaborate
+        </h1>
+        <p>
+            Find a buddy and team up to complete your task at hand or get involved in group of your interest to never
+            feel bored again
+        </p>
+        <div layout-gt-sm="row" layout-sm="column">
+            <img src="../../img/fun1.png" class="img-responsive landingpage-image"/>
+            <img src="../../img/fun2.png" class="img-responsive landingpage-image"/>
+            <img src="../../img/fun3.png" class="img-responsive landingpage-image"/>
+        </div>
+        <div layout-gt-sm="row" layout-sm="column">
+            <img src="../../img/fun4.png" class="img-responsive landingpage-image"/>
+            <img src="../../img/fun5.png" class="img-responsive landingpage-image"/>
+            <img src="../../img/fun6.png" class="img-responsive landingpage-image"/>
+        </div>
+
+    </section>
+    <section id="powerd-by" class="section-info powerd-by-section">
+        <h1>
+            Never Miss a Event
+        </h1>
+        <p>
+            Built just for you! With seamless integration with twitter, Just so that you never miss out on something fun
+        </p>
+        <div>
+            <img src="../../img/twitter.png">
+        </div>
+    </section>
+    <section class="section-info" class="section-info">
+        <h1>
+            Application powered by
+        </h1>
+        <md-list layout-gt-sm="row" layout-sm="column">
+            <md-list-item>
+                <img src="../../img/flickr-logo-png-20.png" class="log-image img-responsive"/>
+            </md-list-item>
+            <md-list-item>
+                <img src="../../img/google-map.png" class="log-image img-responsive"/>
+            </md-list-item>
+            <md-list-item class="twitter-logo">
+                <i class="fa fa-twitter twitter-logo-center"  aria-hidden="true"></i>
+            </md-list-item>
+        </md-list>
+    </section>
+    <section class="get-started-section">
+        <a href="/#/user">
+        <span>
+                Click here to start now
+        </span>
+        </a>
+    </section>
+    <section class="footer">
+        <p>This application was developed by collaborated work of Kartikeya Shukla and Vineeth Ravindra</p>
+        <p>All code is Open. Feel free to modify and distribute. Dont forget to say thanks :)</p>
+        <div layout="row">
+            <div flex class="linkedin-vin" layout="column">
+                <a href="https://www.linkedin.com/in/vineeth89" target="_blank">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <span>Vineeth Ravindra</span>
+            </div>
+            <div class="linkedin-shu" flex layout="column">
+                <a href="https://www.linkedin.com/in/kartikeyashukla19" target="_blank">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <span>Kartikeya Shukla</span>
+            </div>
+        </div>
+        <div class="linkedin-git" ng-click="model.openLink('git')">
+            <a href="https://github.com/Qartks89/Connexion" target="_blank">
+                <i class="fa fa-github" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+</div>
